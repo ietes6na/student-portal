@@ -1,49 +1,40 @@
-// ==========================================
-// ДАННЫЕ (Массивы)
-// ==========================================
-
-// Данные расписания (От Участника 1)
+// === ДАННЫЕ ===
 const scheduleData = [
     { day: "Понедельник", time: "09:00 - 10:30", subject: "Высшая математика", room: "305", teacher: "Иванов И.И." },
     { day: "Понедельник", time: "10:45 - 12:15", subject: "Физика", room: "412", teacher: "Петров П.П." },
     { day: "Вторник", time: "09:00 - 10:30", subject: "Программирование", room: "Comp-1", teacher: "Сидоров С.С." },
     { day: "Вторник", time: "10:45 - 12:15", subject: "Английский язык", room: "201", teacher: "Смирнова А.А." },
-    { day: "Среда", time: "12:30 - 14:00", subject: "Базы данных", room: "Comp-2", teacher: "Козлов К.К." }
+    { day: "Среда", time: "12:30 - 14:00", subject: "Базы данных", room: "Comp-2", teacher: "Козлов К.К." },
+    { day: "Четверг", time: "09:00 - 10:30", subject: "Философия", room: "105", teacher: "Новиков Н.Н." },
+    { day: "Пятница", time: "10:45 - 12:15", subject: "Физкультура", room: "Спортзал", teacher: "Орлов О.О." }
 ];
 
-// Данные новостей (От Участника 2) 👇 ДОБАВЛЕНО
 const newsData = [
-    { date: "01.06.2026", category: "Важное", title: "Изменения в сессии", text: "Начало летней сессии перенесено на 15 июня." },
-    { date: "28.05.2026", category: "Мероприятия", title: "День открытых дверей", text: "Приглашаем школьников посетить наш университет 10 июня." },
-    { date: "25.05.2026", category: "Учеба", title: "Новый курс по Python", text: "Открыта регистрация на факультативный курс." }
+    { date: "01.06.2026", category: "Важное", title: "Изменения в сессии", text: "Обращаем внимание, что начало летней экзаменационной сессии перенесено на 15 июня. Проверьте обновленное расписание." },
+    { date: "28.05.2026", category: "Мероприятия", title: "День открытых дверей", text: "Приглашаем школьников и их родителей посетить наш университет 10 июня. Будут работать интерактивные площадки." },
+    { date: "25.05.2026", category: "Учеба", title: "Новый курс по Python", text: "Открыта регистрация на факультативный курс 'Python для анализа данных'. Занятия начнутся со следующей недели." },
+    { date: "20.05.2026", category: "Мероприятия", title: "Студенческая весна", text: "Финальный концерт фестиваля состоится в главном актовом зале. Вход по студенческим билетам." }
 ];
 
-let currentNewsFilter = 'all'; // Переменная для фильтра новостей
+let currentNewsFilter = 'all';
 
-// ==========================================
-// УПРАВЛЕНИЕ СЕКЦИЯМИ (Обновлено для Участника 2)
-// ==========================================
+// === УПРАВЛЕНИЕ СЕКЦИЯМИ ===
 function showSection(sectionId) {
-    // Скрываем ВСЕ секции
     const sections = ['home', 'schedule', 'news', 'contacts'];
     sections.forEach(id => {
         const el = document.getElementById(id + '-section');
         if (el) el.style.display = 'none';
     });
 
-    // Показываем нужную
     const target = document.getElementById(sectionId + '-section');
     if (target) {
         target.style.display = 'block';
-        // Если открыли расписание или новости, запускаем их отрисовку
         if (sectionId === 'schedule') renderSchedule();
-        if (sectionId === 'news') renderNews(); // 👈 ДОБАВЛЕНО
+        if (sectionId === 'news') renderNews();
     }
 }
 
-// ==========================================
-// ЛОГИКА РАСПИСАНИЯ (От Участника 1)
-// ==========================================
+// === ЛОГИКА РАСПИСАНИЯ ===
 function renderSchedule() {
     const tbody = document.getElementById('schedule-body');
     const selectedDay = document.getElementById('day-select').value;
@@ -61,23 +52,18 @@ function renderSchedule() {
     });
 }
 
-// ==========================================
-// ЛОГИКА НОВОСТЕЙ (От Участника 2) 👇 ДОБАВЛЕНО
-// ==========================================
+// === ЛОГИКА НОВОСТЕЙ ===
 function filterNews(category, btnElement) {
     currentNewsFilter = category;
-    // Убираем активный класс у всех кнопок
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-    // Добавляем активный класс нажатой кнопке
     btnElement.classList.add('active');
     renderNews();
 }
 
 function renderNews() {
     const container = document.getElementById('news-container');
-    container.innerHTML = ''; // Очистка
+    container.innerHTML = '';
 
-    // Фильтрация
     const filteredNews = currentNewsFilter === 'all' 
         ? newsData 
         : newsData.filter(item => item.category === currentNewsFilter);
@@ -87,7 +73,6 @@ function renderNews() {
         return;
     }
 
-    // Отрисовка карточек
     filteredNews.forEach(news => {
         const card = document.createElement('div');
         card.className = 'news-card';
@@ -101,9 +86,23 @@ function renderNews() {
     });
 }
 
-// ==========================================
-// ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ
-// ==========================================
+// === ЛОГИКА КОНТАКТОВ ===
+function handleContactSubmit(event) {
+    event.preventDefault();
+    const form = document.getElementById('contact-form');
+    const successMsg = document.getElementById('form-success-message');
+    
+    form.style.display = 'none';
+    successMsg.style.display = 'block';
+    
+    setTimeout(() => {
+        form.reset();
+        form.style.display = 'block';
+        successMsg.style.display = 'none';
+    }, 3000);
+}
+
+// === ИНИЦИАЛИЗАЦИЯ ===
 document.addEventListener('DOMContentLoaded', () => {
-    showSection('home'); // По умолчанию показываем главную
+    showSection('home');
 });
