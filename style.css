@@ -101,3 +101,78 @@ footer {
     padding: 10px 0;
     margin-top: 20px;
 }
+/* ... (стили Участника 1 остаются без изменений) ... */
+
+/* Стили для новостей (Задача Участника 2) */
+.news-controls {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid #3498db;
+    background-color: white;
+    color: #3498db;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background-color: #3498db;
+    color: white;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.news-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-left: 4px solid #3498db;
+    transition: transform 0.2s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.news-date {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.news-category {
+    display: inline-block;
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.news-title {
+    font-size: 1.2rem;
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+}
+
+.news-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #555;
+}
