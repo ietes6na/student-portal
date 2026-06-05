@@ -8,17 +8,17 @@
 </head>
 <body>
 
-    <!-- Шапка сайта -->
+    <!-- Шапка сайта с навигацией -->
     <header>
         <div class="container">
             <h1>🎓 Студенческий Портал</h1>
             <nav>
                 <ul>
+                    <!-- Ссылки вызывают JS-функцию showSection для переключения вкладок -->
                     <li><a href="#" onclick="showSection('home')">Главная</a></li>
                     <li><a href="#" onclick="showSection('schedule')">Расписание</a></li>
-                    <!-- Ссылки на другие разделы (заглушки для других участников) -->
-                    <li><a href="#" onclick="alert('Раздел в разработке: Новости')">Новости</a></li>
-                    <li><a href="#" onclick="alert('Раздел в разработке: Контакты')">Контакты</a></li>
+                    <li><a href="#" onclick="showSection('news')">Новости</a></li>
+                    <li><a href="#" onclick="showSection('contacts')">Контакты</a></li>
                 </ul>
             </nav>
         </div>
@@ -27,17 +27,17 @@
     <!-- Основной контент -->
     <main class="container">
         
-        <!-- Секция: Главная -->
+        <!-- 1. Секция: Главная (видна по умолчанию) -->
         <section id="home-section">
             <h2>Добро пожаловать!</h2>
             <p>Выберите раздел в меню выше, чтобы узнать расписание занятий или прочитать новости.</p>
         </section>
 
-        <!-- Секция: Расписание (Задача Участника 1) -->
+        <!-- 2. Секция: Расписание (Код Участника 1) -->
         <section id="schedule-section" style="display: none;">
             <h2>📅 Расписание занятий</h2>
             
-            <!-- Фильтр по дням недели -->
+            <!-- Фильтр дней недели -->
             <div class="schedule-controls">
                 <label for="day-select">Выберите день:</label>
                 <select id="day-select" onchange="renderSchedule()">
@@ -63,20 +63,46 @@
                         </tr>
                     </thead>
                     <tbody id="schedule-body">
-                        <!-- Сюда JS будет вставлять строки -->
+                        <!-- Сюда JavaScript вставит строки таблицы -->
                     </tbody>
                 </table>
             </div>
         </section>
 
+        <!-- 3. Секция: Новости (Код Участника 2) -->
+        <section id="news-section" style="display: none;">
+            <h2>📰 Новости университета</h2>
+            
+            <!-- Кнопки фильтрации новостей -->
+            <div class="news-controls">
+                <button class="filter-btn active" onclick="filterNews('all', this)">Все</button>
+                <button class="filter-btn" onclick="filterNews('Учеба', this)">Учеба</button>
+                <button class="filter-btn" onclick="filterNews('Мероприятия', this)">Мероприятия</button>
+                <button class="filter-btn" onclick="filterNews('Важное', this)">Важное</button>
+            </div>
+
+            <!-- Контейнер для карточек новостей -->
+            <div id="news-container" class="news-grid">
+                <!-- Сюда JavaScript вставит карточки новостей -->
+            </div>
+        </section>
+
+        <!-- 4. Секция: Контакты (Заглушка для Участника 3) -->
+        <section id="contacts-section" style="display: none;">
+            <h2>📞 Контакты</h2>
+            <p>Этот раздел находится в разработке (задача Участника 3).</p>
+        </section>
+
     </main>
 
+    <!-- Подвал сайта -->
     <footer>
         <div class="container">
             <p>&copy; 2026 Студенческий Портал. Групповой проект.</p>
         </div>
     </footer>
 
+    <!-- Подключение скрипта -->
     <script src="script.js"></script>
 </body>
 </html>
